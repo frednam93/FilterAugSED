@@ -124,7 +124,6 @@ def rand_filter(features, db_range=(-9, 9), n_bands=(2, 5), print_params=False):
         freq_filt = torch.ones((batch_size, n_freq_bin, 1)).to(features)
         for i in range(n_freq_band):
             freq_filt[:, band_bndry_freqs[i]:band_bndry_freqs[i+1], :] = band_factors[:, i].unsqueeze(-1).unsqueeze(-1)
-        #freq_filt = torch.rand((batchsize, freq, 1)) * (fmax - fmin) + fmin
         return features * freq_filt
     else:
         return features
