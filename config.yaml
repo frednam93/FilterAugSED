@@ -53,44 +53,6 @@ feature:
   sr: 16000
   net_subsample: 4
 
-dataset:                               # change with your paths if different.
-  # NOTE: if you have data in 44kHz only then synth_folder will be the path where
-  # resampled data will be placed.
-  weak_folder: "../datasets/dcase2021/dataset/audio/train/weak_16k/"
-  weak_folder_ft: "../datasets/dcase2021/dataset/audio/train/weak_ft/"
-  weak_folder_44k: "../datasets/dcase2021/dataset/audio/train/weak/"
-  weak_tsv: "../datasets/dcase2021/dataset/metadata/train/weak.tsv"
-  unlabeled_folder: "../datasets/dcase2021/dataset/audio/train/unlabel_in_domain_16k/"
-  unlabeled_folder_ft: "../datasets/dcase2021/dataset/audio/train/unlabel_in_domain_ft/"
-  unlabeled_folder_44k: "../datasets/dcase2021/dataset/audio/train/unlabel_in_domain/"
-  test_folder: "../datasets/dcase2021/dataset/audio/validation/validation_16k/"
-  test_folder_44k: "../datasets/dcase2021/dataset/audio/validation/validation/"
-  test_folder_ft: "../datasets/dcase2021/dataset/audio/validation/validation_ft/"
-  test_tsv: "../datasets/dcase2021/dataset/metadata/validation/validation.tsv"
-  test_dur: "../datasets/dcase2021/dataset/metadata/validation/validation_durations.tsv"
-  pubeval_folder: "../datasets/dcase2021/dataset/audio/eval/public_16k/"
-  pubeval_folder_44k: "../datasets/dcase2021/dataset/audio/eval/public/"
-  pubeval_folder_ft: "../datasets/dcase2021/dataset/audio/eval/public_ft/"
-  pubeval_tsv: "../datasets/dcase2021/dataset/metadata/eval/public.tsv"
-  pubeval_dur: "../datasets/dcase2021/dataset/metadata/eval/public_durations.tsv"
-synth_dataset:                         # change with your paths if different.
-  synth_train_folder: "../datasets/dcase2021/dataset/audio/train/synthetic21_train/soundscapes_16k/"
-  synth_train_folder_44k: "../datasets/dcase2021/dataset/audio/train/synthetic21_train/soundscapes/"
-  synth_train_folder_ft: "../datasets/dcase2021/dataset/audio/train/synthetic21_train/soundscapes_ft/"
-  synth_train_tsv: "../datasets/dcase2021/dataset/metadata/train/synthetic21_train/soundscapes.tsv"
-  synth_train_dur: "../datasets/dcase2021/dataset/metadata/train/synthetic21_train/durations.tsv"
-  synth_val_folder: "../datasets/dcase2021/dataset/audio/validation/synthetic21_validation/soundscapes_16k/"
-  synth_val_folder_44k: "../datasets/dcase2021/dataset/audio/validation/synthetic21_validation/soundscapes/"
-  synth_val_folder_ft: "../datasets/dcase2021/dataset/audio/validation/synthetic21_validation/soundscapes_ft/"
-  synth_val_tsv: "../datasets/dcase2021/dataset/metadata/validation/synthetic21_validation/soundscapes.tsv"
-  synth_val_dur: "../datasets/dcase2021/dataset/metadata/validation/synthetic21_validation/durations.tsv"
-scaler:
-  statistic: instance                  # instance or dataset-wide statistic
-  normtype: minmax                     # minmax or standard or mean normalization
-  dims: [ 0, 2 ]                       # dimensions over which normalization is applied
-  savepath: ./scaler.ckpt              # path to scaler checkpoint
-opt:
-  lr: 0.001
 CRNN:
   n_class: 10
   n_RNN_cell: 256
@@ -106,3 +68,36 @@ CRNN:
   stride: [ 1, 1, 1, 1, 1, 1, 1 ]
   n_filt: [ 32, 64, 128, 256, 256, 256, 256 ]
   pooling: [ [ 2, 2 ], [ 2, 2 ], [ 1, 2 ], [ 1, 2 ], [ 1, 2 ], [ 1, 2 ], [ 1, 2 ] ]
+
+dataset:                               # change with your paths if different.
+  # NOTE: if you have data in 44kHz only then synth_folder will be the path where
+  # resampled data will be placed.
+  weak_folder: "../datasets/dcase2021/dataset/audio/train/weak_16k/"
+  weak_folder_44k: "../datasets/dcase2021/dataset/audio/train/weak/"
+  weak_tsv: "../datasets/dcase2021/dataset/metadata/train/weak.tsv"
+  unlabeled_folder: "../datasets/dcase2021/dataset/audio/train/unlabel_in_domain_16k/"
+  unlabeled_folder_44k: "../datasets/dcase2021/dataset/audio/train/unlabel_in_domain/"
+  test_folder: "../datasets/dcase2021/dataset/audio/validation/validation_16k/"
+  test_folder_44k: "../datasets/dcase2021/dataset/audio/validation/validation/"
+  test_tsv: "../datasets/dcase2021/dataset/metadata/validation/validation.tsv"
+  test_dur: "../datasets/dcase2021/dataset/metadata/validation/validation_durations.tsv"
+  pubeval_folder: "../datasets/dcase2021/dataset/audio/eval/public_16k/"
+  pubeval_folder_44k: "../datasets/dcase2021/dataset/audio/eval/public/"
+  pubeval_tsv: "../datasets/dcase2021/dataset/metadata/eval/public.tsv"
+  pubeval_dur: "../datasets/dcase2021/dataset/metadata/eval/public_durations.tsv"
+synth_dataset:                         # change with your paths if different.
+  synth_train_folder: "../datasets/dcase2021/dataset/audio/train/synthetic21_train/soundscapes_16k/"
+  synth_train_folder_44k: "../datasets/dcase2021/dataset/audio/train/synthetic21_train/soundscapes/"
+  synth_train_tsv: "../datasets/dcase2021/dataset/metadata/train/synthetic21_train/soundscapes.tsv"
+  synth_train_dur: "../datasets/dcase2021/dataset/metadata/train/synthetic21_train/durations.tsv"
+  synth_val_folder: "../datasets/dcase2021/dataset/audio/validation/synthetic21_validation/soundscapes_16k/"
+  synth_val_folder_44k: "../datasets/dcase2021/dataset/audio/validation/synthetic21_validation/soundscapes/"
+  synth_val_tsv: "../datasets/dcase2021/dataset/metadata/validation/synthetic21_validation/soundscapes.tsv"
+  synth_val_dur: "../datasets/dcase2021/dataset/metadata/validation/synthetic21_validation/durations.tsv"
+scaler:
+  statistic: instance                  # instance or dataset-wide statistic
+  normtype: minmax                     # minmax or standard or mean normalization
+  dims: [ 0, 2 ]                       # dimensions over which normalization is applied
+  savepath: ./scaler.ckpt              # path to scaler checkpoint
+opt:
+  lr: 0.001
