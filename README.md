@@ -9,7 +9,7 @@ Paper is available in [DCASE Technical report](http://dcase.community/documents/
 
 ## FilterAugment
 Filter Augment is an original data augmentation method for audio/speech representation learning. It randomly devides frequency domain into several bands, and then apply different amplitudes on each band. For more detail, refer to the paper mentioned above.<br>
-![](./FilterAugment_example.png)<br>
+![](./utils/FilterAugment_example.png)<br>
 - This example shows FilterAugment applied on log-mel spectrogram of a 10-second audio clip. There are 3 frequency bands, and the low-frequency band(0~1kHz) is amplified, mid-frequency band(1~2.5kHz)is diminished while high-frequency band(2.5~8kHz) is just slightly diminished.
 
 ## Requirements
