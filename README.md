@@ -14,6 +14,13 @@ You can download dataset by reffering to [DCASE 2021 Task 4 description page](ht
 ## Training
 If you run main.py, it will train and save model in exps folder.
 - 'python main.py'
+- `python train_sed.py`
+
+#### Results:
+
+Dataset | **PSDS-scenario1** | **PSDS-scenario2** | *Intersection-based F1* | *Collar-based F1*
+--------|--------------------|--------------------|-------------------------|-----------------
+Dev-test| **0.353**          | **0.553**          | 79.5%                   | 42.1%
 
 ## Evaluation
 
