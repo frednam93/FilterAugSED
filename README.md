@@ -43,5 +43,5 @@ DESED Real Validation| 0.412          | 0.632          | 47.9%
 ## Citation & Contact
 If this repository helped your research, please cite the paper below!(will be updated soon)
 
-If you have any query, please contact Hyeonuk Nam at frednam@kaist.ac.kr
+Please contact Hyeonuk Nam at frednam@kaist.ac.kr for any query.
 
