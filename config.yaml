@@ -1,0 +1,112 @@
+generals:
+  warn: False       # show warnings
+  save_folder: exps/new_exp # saving directory    #default: exps/new_exp     # exps/new_exp_yolo
+  test_train: False
+  savepsds: True                       # save psds data
+  ensemble_avg: False                    #default: False
+  ensemble_dir: exps/ensemble/
+  test_on_public_eval: False            #default: False
+
+training:
+  debug: False
+  test_only: False     #perform test without training
+  div_dataset: False      #divide datasets by div_ratio. for debugging purpose, to make train/valid/test through dataset faster
+  div_ratio: 25
+  n_epochs: 200 # max num epochs
+  w_cons_max: 2 # max weight used for self supervised loss
+  n_epochs_warmup: 50 # num epochs used for exponential warmup
+  val_thresholds: [0.5] # thresholds used to compute f1 intersection in validation.
+  n_test_thresholds: 50 # number of thresholds used to compute psds in test
+  ema_factor: 0.999 # ema factor for mean teacher
+  weak_split: 0.9
+  seed: 42
+  w_weak: 0.5
+  w_weak_cons: 1
+  weakf1_ratio: 1
+  sum_val_metric: True                   #default: True
+  step_lrdecay: False
+  multigpu: False
+  decode_weak_valid: 0    #weak prediction masking on strong prediction,
+  decode_weak_test: 1     #0: no weak prediction used, 1: weak prediction masking, 2: weak SED
+  trainweak_only: False               #default: False
+  trainweak_withstrong: False
+  afl_loss:     #default: None    # if used, [ 0.125, 4 ]
+  median_window: 7 # length of median filter used to smooth prediction in inference (nb of output frames)
+
+  #data augmentation
+  mixup_rate: 0.5                   # default: new = 0.8? / old = 0.5
+  mixup_type: soft # Soft mixup gives the ratio of the mix to the labels, hard mixup gives a 1 to every label present.
+  time_mask_ratios: [ 5, 20 ]       # defaults: new = [5, 20] / old = [ 10, 20 ]
+  transform:
+    n_transform: 2
+    choice: [ 1, 0, 0 ]             # [ rand_filter, freq_mask, add_noise ]
+    filter_db_range: [ -7.5, 6 ]    # default: new = [ -7.5, 6 ] / old = [ -9, 9 ]
+    filter_bands: [ 2, 5 ]          # default: [ 2, 5 ]
+    freq_mask_ratio: 32             # default: 16
+    noise_snrs: [ 35, 40 ]          # default: new = do not use / old = [ 15, 30 ]
+
+feature:
+  n_mels: 128
+  frame_length: 2048
+  hop_length: 256
+  n_window: 2048
+  sample_rate: 16000
+  f_min: 0
+  f_max: 8000
+  audio_max_len: 10
+  sr: 16000
+  net_subsample: 4
+
+dataset: # change with your paths if different.
+  # NOTE: if you have data in 44kHz only then synth_folder will be the path where
+  # resampled data will be placed.
+  weak_folder: "../datasets/dcase2021/dataset/audio/train/weak_16k/"
+  weak_folder_ft: "../datasets/dcase2021/dataset/audio/train/weak_ft/"
+  weak_folder_44k: "../datasets/dcase2021/dataset/audio/train/weak/"
+  weak_tsv: "../datasets/dcase2021/dataset/metadata/train/weak.tsv"
+  unlabeled_folder: "../datasets/dcase2021/dataset/audio/train/unlabel_in_domain_16k/"
+  unlabeled_folder_ft: "../datasets/dcase2021/dataset/audio/train/unlabel_in_domain_ft/"
+  unlabeled_folder_44k: "../datasets/dcase2021/dataset/audio/train/unlabel_in_domain/"
+  test_folder: "../datasets/dcase2021/dataset/audio/validation/validation_16k/"
+  test_folder_44k: "../datasets/dcase2021/dataset/audio/validation/validation/"
+  test_folder_ft: "../datasets/dcase2021/dataset/audio/validation/validation_ft/"
+  test_tsv: "../datasets/dcase2021/dataset/metadata/validation/validation.tsv"
+  test_dur: "../datasets/dcase2021/dataset/metadata/validation/validation_durations.tsv"
+  pubeval_folder: "../datasets/dcase2021/dataset/audio/eval/public_16k/"
+  pubeval_folder_44k: "../datasets/dcase2021/dataset/audio/eval/public/"
+  pubeval_folder_ft: "../datasets/dcase2021/dataset/audio/eval/public_ft/"
+  pubeval_tsv: "../datasets/dcase2021/dataset/metadata/eval/public.tsv"
+  pubeval_dur: "../datasets/dcase2021/dataset/metadata/eval/public_durations.tsv"
+synth_dataset:
+  synth_train_folder: "../datasets/dcase2021/dataset/audio/train/synthetic21_train/soundscapes_16k/"
+  synth_train_folder_44k: "../datasets/dcase2021/dataset/audio/train/synthetic21_train/soundscapes/"
+  synth_train_folder_ft: "../datasets/dcase2021/dataset/audio/train/synthetic21_train/soundscapes_ft/"
+  synth_train_tsv: "../datasets/dcase2021/dataset/metadata/train/synthetic21_train/soundscapes.tsv"
+  synth_train_dur: "../datasets/dcase2021/dataset/metadata/train/synthetic21_train/durations.tsv"
+  synth_val_folder: "../datasets/dcase2021/dataset/audio/validation/synthetic21_validation/soundscapes_16k/"
+  synth_val_folder_44k: "../datasets/dcase2021/dataset/audio/validation/synthetic21_validation/soundscapes/"
+  synth_val_folder_ft: "../datasets/dcase2021/dataset/audio/validation/synthetic21_validation/soundscapes_ft/"
+  synth_val_tsv: "../datasets/dcase2021/dataset/metadata/validation/synthetic21_validation/soundscapes.tsv"
+  synth_val_dur: "../datasets/dcase2021/dataset/metadata/validation/synthetic21_validation/durations.tsv"
+scaler:
+  statistic: instance # instance or dataset-wide statistic
+  normtype: minmax # minmax or standard or mean normalization
+  dims: [ 0, 2 ] # dimensions over which normalization is applied
+  savepath: ./scaler.ckpt # path to scaler checkpoint
+opt:
+  lr: 0.001
+CRNN:
+  n_class: 10
+  n_RNN_cell: 256
+  n_RNN_layer: 2
+  rec_dropout: 0
+  attention: True
+
+  n_input_ch: 1
+  activation: cg
+  conv_dropout: 0.5
+  kernel: [ 3, 3, 3, 3, 3, 3, 3 ]
+  pad: [ 1, 1, 1, 1, 1, 1, 1 ]
+  stride: [ 1, 1, 1, 1, 1, 1, 1 ]
+  n_filt: [ 32, 64, 128, 256, 256, 256, 256 ]
+  pooling: [ [ 2, 2 ], [ 2, 2 ], [ 1, 2 ], [ 1, 2 ], [ 1, 2 ], [ 1, 2 ], [ 1, 2 ] ]
