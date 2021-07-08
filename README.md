@@ -13,7 +13,7 @@ You can download dataset by reffering to [DCASE 2021 Task 4 description page](ht
 
 ## Training
 If you run main.py, it will train and save model in exps folder.
-- python main.py
+- 'python main.py'
 
 ## Evaluation
 
