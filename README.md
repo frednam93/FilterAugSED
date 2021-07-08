@@ -20,6 +20,8 @@ Filter Augment is an original data augmentation method for audio/speech represen
 - numpy
 - pathlib
 - soundfile
+- psds_eval
+- sed_eval
 - asteroid
 
 ## Dataset
