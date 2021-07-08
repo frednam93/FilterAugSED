@@ -35,7 +35,7 @@ python main.py
 
 Dataset              | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
 ---------------------|----------------|----------------|-----------------
-DESED Real Validation| 0.412          | 0.632          | 47.9%
+DESED Real Validation| 0.405          | 0.616          | 48.0%
 
 ## Reference
 [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task)
