@@ -28,7 +28,7 @@ If you run main.py, it will train and save model in exps folder.
 
 Dataset | **PSDS-scenario1** | **PSDS-scenario2** | *Intersection-based F1* | *Collar-based F1*
 --------|--------------------|--------------------|-------------------------|-----------------
-Dev-test| **0.353**          | **0.553**          | 79.5%                   | 42.1%
+Dev-test| **0.412**          | **0.634**          | 70.6%                   | 47.9%
 
 ## Reference
 [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task)
