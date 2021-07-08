@@ -1,6 +1,6 @@
 # Sound Event Detection system with FilterAugment
 
-**Heavily Augmented Sound Event Detection utilizing Weak Predictions**<br>
+Official implementation of **Heavily Augmented Sound Event Detection utilizing Weak Predictions**<br>
 by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-Min Choi, Yong-Hwa Park @ Human Lab, Mechanical Engineering Department, KAIST
 
 Won **3rd place** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results).
