@@ -26,7 +26,7 @@ You can train and save model in `exps` folder by running:
 
 #### Results:
 
-Dataset              | **PSDS-scenario1** | **PSDS-scenario2** | *Collar-based F1*
+Dataset              | PSDS-scenario1     | PSDS-scenario2     | Collar-based F1
 ---------------------|--------------------|--------------------|-----------------
 DESED Real Validation| **0.412**          | **0.634**          | 47.9%
 
