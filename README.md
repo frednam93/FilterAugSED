@@ -8,6 +8,14 @@ Won 3rd place in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/t
 Paper is available in [DCASE Technical report](http://dcase.community/documents/challenge2021/technical_reports/DCASE2021_Nam_41_t4.pdf) and arxiv(will be submitted soon).
 
 ## Requirements
+pytorch
+pytorchaudio
+pytorch lightning
+asteroid
+scipy
+numpy
+pathlib
+soundfile
 
 ## Dataset
 You can download dataset by reffering to [DCASE 2021 Task 4 description page](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments) or [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task). Then, set the dataset directories in config.yaml accordingly. You will need DESED real datasets(weak/unlabeled in domain/validation/public eval) and DESED synthetic dataset(train/validation).
