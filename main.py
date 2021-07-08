@@ -105,7 +105,7 @@ def main(iteration=None):
     if not (train_cfg["test_only"] or configs["generals"]["ensemble_avg"]):
         logger.info('   training starts!')
         start_time = time()
-        history = History(train_cfg)
+        history = History()
         bestmodels = BestModels()
         for train_cfg["epoch"] in range(train_cfg["n_epochs"]):
             epoch_time = time()

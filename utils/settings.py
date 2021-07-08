@@ -7,6 +7,7 @@ import pytorch_lightning as pl
 import logging
 import pickle
 import yaml
+from copy import deepcopy
 from collections import OrderedDict
 
 from utils.utils import *
@@ -215,21 +216,15 @@ def get_printings(train_cfg):
 
 
 class History:
-    def __init__(self, train_cfg):
+    def __init__(self):
         self.history = {"train_total_loss": [], "train_class_strong_loss": [], "train_class_weak_loss": [],
                         "train_cons_strong_loss": [], "train_cons_weak_loss": [], "stud_val_metric": [],
                         "tch_val_metric": []}
-        self.sum_val_metric = train_cfg["sum_val_metric"]
 
     def update(self, train_return, val_return):
         total, class_str, class_wk, cons_str, cons_wk = train_return
 
-        if self.sum_val_metric:
-            stud_val_metric, tch_val_metric = val_return
-        else:
-            stud_weak, stud_inter, tch_weak, tch_inter = val_return
-            stud_val_metric = stud_weak + stud_inter
-            tch_val_metric = tch_weak + tch_inter
+        stud_val_metric, tch_val_metric = val_return
 
         self.history['train_total_loss'].append(total)
         self.history['train_class_strong_loss'].append(class_str)

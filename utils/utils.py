@@ -4,12 +4,11 @@ import torch.nn as nn
 import torchaudio
 from torch.utils.data import Sampler
 import os
+import math
 import scipy
 from pathlib import Path
 from asteroid.engine.schedulers import BaseScheduler
 
-
-from utils.model import *
 from utils.evaluation_measures import compute_sed_eval_metrics
 from utils.dataset import *
 
