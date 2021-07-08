@@ -6,4 +6,21 @@ by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-M
 Won 3rd place in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results).<br>
 Paper is available in [DCASE Technical report](http://dcase.community/documents/challenge2021/technical_reports/DCASE2021_Nam_41_t4.pdf) and arxiv(will be submitted soon).<br>
 
-Codes will be uploaded soon!
+## Requirements
+
+## Datasets
+
+## Training
+
+## Evaluation
+
+## Reference
+[DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task)
+
+## Repository Structure
+
+## Citation & Contact
+If this repository helped your research, please cite the paper below!(will be updated soon)
+
+If you have any query, please contact Hyeonuk Nam at frednam@kaist.ac.kr
+
