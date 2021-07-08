@@ -1,9 +1,6 @@
 #Some codes are adopted from https://github.com/DCASE-REPO/DESED_task
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-import math
-from copy import deepcopy
 #from conformer.encoder import ConformerBlock as ConformerBlock2
 
 
