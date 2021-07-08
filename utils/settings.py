@@ -110,7 +110,6 @@ def get_encoder(LabelDict, feature_cfg, audio_len):
 def get_mt_datasets(configs, server_cfg, train_cfg):
     general_cfg = configs["generals"]
     encoder = train_cfg["encoder"]
-    encoder_300 = train_cfg["encoder300"]
     dataset_cfg = configs["dataset"]
     batch_size_val = server_cfg["batch_size_val"]
     num_workers = server_cfg["num_workers"]
@@ -305,19 +304,5 @@ def get_ensemble_models(train_cfg):
         net_temp.load_state_dict(torch.load(tch_nets_saved[i], map_location=train_cfg["device"]))
         train_cfg["tch_nets"].append(net_temp)
 
-    return train_cfg
-
-
-def get_testtrain_datasets(configs, server_cfg, train_cfg):
-    synth_train_df, synth_train_tsv = train_cfg["train_tsvs"]
-    synth_train_dir = configs["synth_dataset"]["synth_train_folder"]
-    synth_traintest_dataset = StronglyLabeledDataset(synth_train_df, synth_train_dir, True, train_cfg["encoder"])
-    train_cfg["test_tsvs"] = [synth_train_tsv, configs["synth_dataset"]["synth_train_dur"]]
-    if train_cfg["div_dataset"]:
-        synth_traintest_dataset = torch.utils.data.Subset(synth_traintest_dataset,
-                                                          torch.arange(int(len(synth_traintest_dataset) /
-                                                                           train_cfg["div_ratio"])))
-    train_cfg["testloader"] = DataLoader(synth_traintest_dataset, batch_size=server_cfg["batch_size_val"],
-                                    num_workers=server_cfg["num_workers"])
     return train_cfg
 

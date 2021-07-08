@@ -146,15 +146,6 @@ def main(iteration=None):
         test_returns = test(train_cfg)
         logger.info(printing_test % test_returns)
 
-        # test with training set
-        if configs["generals"]["test_train"]:
-            train_cfg = get_testtrain_datasets(configs, server_cfg, train_cfg)
-            train_cfg["plot_folder_test"] = None
-            train_cfg["psds_folders"] = [None, None]
-            train_test_returns = test(train_cfg)
-
-            logger.info(printing_test.replace("result", "result on train dataset") % train_test_returns)
-
     ##############################                TEST ENSEMBLE AVERAGE               ##############################
     else:
         logger.info("   ensemble test starts!")

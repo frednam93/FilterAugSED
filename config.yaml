@@ -1,11 +1,10 @@
 generals:
-  warn: False       # show warnings
-  save_folder: exps/new_exp # saving directory    #default: exps/new_exp     # exps/new_exp_yolo
-  test_train: False
+  warn: False                          # show warnings
+  save_folder: exps/new_exp            # saving directory
   savepsds: True                       # save psds data
-  ensemble_avg: False                    #default: False
-  ensemble_dir: exps/ensemble/
-  test_on_public_eval: False            #default: False
+  ensemble_avg: False                  # perform ensemble average on the models saved in ensemble_dir
+  ensemble_dir: exps/ensemble/         # directory of models gathered for ensemble average
+  test_on_public_eval: False           # change test dataset to DESED Reak public_eval (default dataset is DESED Real Validation)
 
 training:
   debug: False
