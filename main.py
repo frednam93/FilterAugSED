@@ -118,21 +118,9 @@ def main(iteration=None):
                                           (time() - epoch_time,)))
             logger = bestmodels.update(train_cfg, logger, val_metrics)
 
-            # reduce lr when val_loss do not improve for 5 epochs
-            if train_cfg["step_lrdecay"]:
-                if train_cfg["test_only"] + 1 == int(train_cfg["n_epochs"]/2):
-                    for g in train_cfg["optimizer"].param_groups:
-                        g['lr'] /= 10
-                    logger.info('   Loss 1/10')
-                elif train_cfg["test_only"] + 1 == int(train_cfg["n_epochs"] * 3 / 4):
-                    for g in train_cfg["optimizer"].param_groups:
-                        g['lr'] /= 10
-                    logger.info('   Loss 1/10')
-
         #save model parameters & history dictionary
         logger.info("        best student/teacher val_metrics: %.3f / %.3f" % bestmodels.get_bests(train_cfg["best_paths"]))
         history.save(os.path.join(configs["generals"]["save_folder"], "history.pickle"))
-        #torch.cuda.empty_cache()
         logger.info("   training took %.2f mins" % ((time()-start_time)/60))
 
 
@@ -326,12 +314,9 @@ def validation(train_cfg):
     stud_intersection_f1 = compute_per_intersection_macro_f1(val_stud_buffer, synth_valid_tsv, synth_valid_dur)
     tch_intersection_f1 = compute_per_intersection_macro_f1(val_tch_buffer, synth_valid_tsv, synth_valid_dur)
     if not train_cfg["trainweak_only"]:
-        if train_cfg["sum_val_metric"]:
-            stud_val_metric = stud_weak_f1.item() * train_cfg["weakf1_ratio"] + stud_intersection_f1
-            tch_val_metric = tch_weak_f1.item() * train_cfg["weakf1_ratio"] + tch_intersection_f1
-            return stud_val_metric, tch_val_metric
-        else:
-            return stud_weak_f1.item(), stud_intersection_f1, tch_weak_f1.item(), tch_intersection_f1
+        stud_val_metric = stud_weak_f1.item() + stud_intersection_f1
+        tch_val_metric = tch_weak_f1.item() + tch_intersection_f1
+        return stud_val_metric, tch_val_metric
     else:
         return stud_weak_f1.item(), tch_weak_f1.item()
 

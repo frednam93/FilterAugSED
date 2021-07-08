@@ -201,12 +201,8 @@ def get_f1calcs(n_class, device):
 
 
 def get_printings(train_cfg):
-    if train_cfg["sum_val_metric"]:
-        printing_epoch = '[Epc %d] tt: %0.3f, cl_st: %0.3f, cl_wk: %0.3f, cn_st: %0.3f, cn_wk: %0.3f, ' \
-                              'st_vl: %0.3f, t_vl: %0.3f, t: %ds'
-    else:
-        printing_epoch = '[Epc %d] tt: %0.3f, cl_st: %0.3f, cl_wk: %0.3f, cn_st: %0.3f, cn_wk: %0.3f,' \
-                              ' st_wk: %0.3f, st_it: %0.3f, t_wk: %0.3f, t_it: %0.3f, t: %ds'
+    printing_epoch = '[Epc %d] tt: %0.3f, cl_st: %0.3f, cl_wk: %0.3f, cn_st: %0.3f, cn_wk: %0.3f, ' \
+                          'st_vl: %0.3f, t_vl: %0.3f, t: %ds'
 
     printing_test = "      test result is out!" \
                     "\n      [student] psds1: %.4f, psds2: %.4f"\
