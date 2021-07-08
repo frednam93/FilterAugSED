@@ -21,7 +21,7 @@ Paper is available in [DCASE Technical report](http://dcase.community/documents/
 You can download dataset by reffering to [DCASE 2021 Task 4 description page](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments) or [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task). Then, set the dataset directories in config.yaml accordingly. You will need DESED real datasets(weak/unlabeled in domain/validation/public eval) and DESED synthetic dataset(train/validation).
 
 ## Training
-If you run main.py, it will train and save model in `exps` folder.
+You can train and save model in `exps` folder by running:
 - `python main.py`
 
 #### Results:
