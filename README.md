@@ -45,11 +45,13 @@ DESED Real Validation| 0.405          | 0.616          | 48.0%
 ## Citation & Contact
 If this repository helped your research, please cite the paper below!(will be updated soon)
 ```bib
-@article{
-  title={Heavily Augmented Sound Event Detection utilizing Weak Predictions},
-  author={Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-Min Choi, Yong-Hwa Park},
-  journal={arXiv preprint arXiv:2107.03649},
-  year={2021}
+@misc{nam2021heavily,
+      title={Heavily Augmented Sound Event Detection utilizing Weak Predictions}, 
+      author={Hyeonuk Nam and Byeong-Yun Ko and Gyeong-Tae Lee and Seong-Hu Kim and Won-Ho Jung and Sang-Min Choi and Yong-Hwa Park},
+      year={2021},
+      eprint={2107.03649},
+      archivePrefix={arXiv},
+      primaryClass={eess.AS}
 }
 ```
 Please contact Hyeonuk Nam at frednam@kaist.ac.kr for any query.
