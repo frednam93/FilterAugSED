@@ -5,7 +5,7 @@ by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-M
 
 Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results).
 
-Paper is available in [arxiv](arxiv.org/abs/2107.03649) and [DCASE Technical report](http://dcase.community/documents/challenge2021/technical_reports/DCASE2021_Nam_41_t4.pdf).
+Paper is available in [arxiv](https://arxiv.org/abs/2107.03649) and [DCASE Technical report](http://dcase.community/documents/challenge2021/technical_reports/DCASE2021_Nam_41_t4.pdf).
 
 ## FilterAugment
 Filter Augment is an original data augmentation method for audio/speech representation learning. It randomly devides frequency domain into several bands, and then apply different amplitudes on each band. For more detail, refer to the paper mentioned above.<br>
