@@ -28,7 +28,7 @@ def main(iteration=None):
     args = parser.parse_args()
 
     #set configurations
-    configs, server_cfg, train_cfg, feature_cfg = get_configs()
+    configs, server_cfg, train_cfg, feature_cfg = get_configs(config_dir="./config.yaml")
 
     #declare test_only/debugging mode
     if train_cfg["test_only"]:
