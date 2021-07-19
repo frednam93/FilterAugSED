@@ -13,16 +13,14 @@ Filter Augment is an original data augmentation method for audio/speech represen
 - This example shows FilterAugment applied on log-mel spectrogram of a 10-second audio clip. There are 3 frequency bands, and the low-frequency band(0 ~ 1kHz) is amplified, mid-frequency band(1 ~ 2.5kHz)is diminished while high-frequency band(2.5 ~ 8kHz) is just slightly diminished.
 
 ## Requirements and versions used
-- pytorch: 1.8.0
-- pytorchaudio: 0.8.0
-- pytorch lightning: 1.2.4
-- soundfile: 0.10.3
-- sed_eval: 0.2.1
-- psds_eval: 0.3.0
-- scipy: 1.4.1
-- pandas: 1.1.3
-- numpy: 1.19.2
-- asteroid: 0.4.4
+- pytorch==1.8.0
+- pytorch-lightning==1.2.4
+- pytorchaudio==0.8.0
+- scipy==1.4.1
+- pandas==1.1.3
+- numpy==1.19.2
+- other requrements in [requirements.txt](./requirements.txt)
+
 
 ## Dataset
 You can download dataset by reffering to [DCASE 2021 Task 4 description page](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments) or [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task). Then, set the dataset directories in config.yaml accordingly. You will need DESED real datasets (weak/unlabeled in domain/validation/public eval) and DESED synthetic datasets (train/validation).
@@ -38,6 +36,9 @@ python main.py
 Dataset              | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
 ---------------------|----------------|----------------|-----------------
 DESED Real Validation| 0.405          | 0.616          | 48.0%
+
+#### other model settings:
+In the paper, there are 4 models. [config.yaml](./config.yaml) is a hyperparameter setting for model 1. If you wanna use model 2~4 from the paper, you can change "config_dir" in function get_configs in line 31 of [main.py](./main.py) into "config_modelx.yaml" where x=2, 3, 4
 
 ## Reference
 [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task)
