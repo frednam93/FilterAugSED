@@ -1,4 +1,4 @@
-# Sound Event Detection system with FilterAugment
+# Sound Event Detection with FilterAugment
 
 Official implementation of **Heavily Augmented Sound Event Detection utilizing Weak Predictions**<br>
 by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-Min Choi, Yong-Hwa Park @ Human Lab, Mechanical Engineering Department, KAIST
