@@ -38,10 +38,10 @@ Dataset              | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
 DESED Real Validation| 0.405          | 0.616          | 48.0%
 
 #### other model settings:
-In the paper mentioned above, there are 4 models. Default hyperparameter setting is set as [configs/config_model1.yaml](./configs/config_model1.yaml). If you want to train model 2~4 from the paper, you can run the following code instead.
+In the paper mentioned above, there are 4 models. Default hyperparameter setting is set as [configs/config_model1.yaml](./configs/config_model1.yaml). If you want to train model 2~4 from the paper, you can run the following code instead to select config files for other models' hyperparameter settings.
 ```shell
-# this is an example for training model 4
-python main.py --model 4
+# for example, to train model 3:
+python main.py --model 3
 ```
 
 ## Reference
