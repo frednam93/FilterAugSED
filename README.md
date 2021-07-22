@@ -38,7 +38,11 @@ Dataset              | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
 DESED Real Validation| 0.405          | 0.616          | 48.0%
 
 #### other model settings:
-In the paper, there are 4 models. [config.yaml](./config.yaml) is a hyperparameter setting for model 1. If you wanna use model 2~4 from the paper, you can change "config_dir" in function get_configs in line 31 of [main.py](./main.py) into "config_modelx.yaml" where x=2, 3, 4
+In the paper mentioned above, there are 4 models. Default hyperparameter setting is set as [configs/config_model1.yaml](./configs/config_model1.yaml). If you want to train model 2~4 from the paper, you can run the following code instead.
+```shell
+# this is an example for training model 4
+python main.py --model 4
+```
 
 ## Reference
 [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task)
