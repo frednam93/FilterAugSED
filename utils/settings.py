@@ -15,7 +15,7 @@ from utils.model import *
 from utils.dataset import *
 
 
-def get_configs(config_dir, server_config_dir="./config_server.yaml"):
+def get_configs(config_dir, server_config_dir="./configs/config_server.yaml"):
     #get hyperparameters from yaml
     with open(config_dir, "r") as f:
         configs = yaml.safe_load(f)

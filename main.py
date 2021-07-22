@@ -1,4 +1,5 @@
 #Some codes are adopted from https://github.com/DCASE-REPO/DESED_task
+#Paper describing this code is on https://arxiv.org/abs/2107.03649
 import torch
 import torch.optim as optim
 import torch.nn as nn
@@ -24,11 +25,12 @@ def main(iteration=None):
     print("="*50 + "start!!!!" + "="*50)
     matplotlib.rcParams['agg.path.chunksize'] = 10000
     parser = argparse.ArgumentParser(description="gpu_selection")
-    parser.add_argument('--gpu', default=0, type=int)
+    parser.add_argument('--model', default=1, type=int, help='selection of model setting from the paper')
+    parser.add_argument('--gpu', default=0, type=int, help='selection of gpu when you run separate trainings on single server')
     args = parser.parse_args()
 
     #set configurations
-    configs, server_cfg, train_cfg, feature_cfg = get_configs(config_dir="./config.yaml")
+    configs, server_cfg, train_cfg, feature_cfg = get_configs(config_dir="./configs/config_model%d.yaml" % args.model)
 
     #declare test_only/debugging mode
     if train_cfg["test_only"]:
@@ -52,6 +54,7 @@ def main(iteration=None):
     train_cfg["device"] = device
     logger.info("device: " + str(device))
     train_cfg["n_gpu"] = torch.cuda.device_count()
+    logger.info("model selection: model %d" % args.model)
     logger.info("number of GPUs: " + str(train_cfg["n_gpu"]))
 
     #seed
