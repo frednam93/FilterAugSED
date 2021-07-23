@@ -1,4 +1,4 @@
-# Sound Event Detection system with FilterAugment
+# Sound Event Detection with FilterAugment
 
 Official implementation of **Heavily Augmented Sound Event Detection utilizing Weak Predictions**<br>
 by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-Min Choi, Yong-Hwa Park @ Human Lab, Mechanical Engineering Department, KAIST
@@ -35,7 +35,7 @@ python main.py
 
 Dataset              | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
 ---------------------|----------------|----------------|-----------------
-DESED Real Validation| 0.405          | 0.616          | 48.0%
+DESED Real Validation| 0.408          | 0.628          | 49.0%
 
 #### other model settings:
 In the paper mentioned above, there are 4 models. Default hyperparameter setting is set as [configs/config_model1.yaml](./configs/config_model1.yaml). If you want to train model 2~4 from the paper, you can run the following code instead to select config files for other models' hyperparameter settings.
