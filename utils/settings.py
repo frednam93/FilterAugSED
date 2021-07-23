@@ -42,7 +42,7 @@ def get_save_directories(configs, train_cfg, iteration, args):
     if not train_cfg["test_only"]:
         if iteration is not None:
             save_folder = save_folder + '_iter:' + str(iteration)
-        print(save_folder)
+        print("save directory : " + save_folder)
         while not os.path.isdir(save_folder):
             os.mkdir(save_folder)  # saving folder
         with open(os.path.join(save_folder, 'config.yaml'), 'w') as f:
@@ -201,7 +201,7 @@ def get_f1calcs(n_class, device):
     return stud_f1calc.to(device), tch_f1calc.to(device)
 
 
-def get_printings(train_cfg):
+def get_printings():
     printing_epoch = '[Epc %d] tt: %0.3f, cl_st: %0.3f, cl_wk: %0.3f, cn_st: %0.3f, cn_wk: %0.3f, ' \
                           'st_vl: %0.3f, t_vl: %0.3f, t: %ds'
 
@@ -241,6 +241,7 @@ class History:
 
 
 class BestModels:
+    # Class to keep track of the best student/teacher models and save them after training
     def __init__(self):
         self.stud_best_val_metric = 0.0
         self.tch_best_val_metric = 0.0

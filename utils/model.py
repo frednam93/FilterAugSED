@@ -1,7 +1,6 @@
 #Some codes are adopted from https://github.com/DCASE-REPO/DESED_task
 import torch
 import torch.nn as nn
-#from conformer.encoder import ConformerBlock as ConformerBlock2
 
 
 class GLU(nn.Module):

@@ -7,7 +7,6 @@ import os
 import math
 import scipy
 from pathlib import Path
-from asteroid.engine.schedulers import BaseScheduler
 
 from utils.evaluation_measures import compute_sed_eval_metrics
 from utils.dataset import *
@@ -160,13 +159,34 @@ class ConcatDatasetBatchSampler(Sampler):
         return min_len #synth, weak, unlabeled dataset길이를 각각의 batch_size로 나눠서 제일 작은값을 반환
 
 
-class ExponentialWarmup(BaseScheduler):
+class ExponentialWarmup(object):
     def __init__(self, optimizer, max_lr, rampup_length, exponent=-5.0):
-        super().__init__(optimizer)
+        self.optimizer = optimizer
         self.rampup_length = rampup_length
         self.max_lr = max_lr
         self.step_num = 1
         self.exponent = exponent
+
+    def zero_grad(self):
+        self.optimizer.zero_grad()
+
+    def _get_lr(self):
+        return self.max_lr * self._get_scaling_factor()
+
+    def _set_lr(self, lr):
+        for param_group in self.optimizer.param_groups:
+            param_group["lr"] = lr
+
+    def step(self):
+        self.step_num += 1
+        lr = self._get_lr()
+        self._set_lr(lr)
+
+    # def load_state_dict(self, state_dict):
+    #     self.__dict__.update(state_dict)
+    #
+    # def state_dict(self):
+    #     return {key: value for key, value in self.__dict__.items() if key != "optimizer"}
 
     def _get_scaling_factor(self):
         if self.rampup_length == 0:
@@ -175,9 +195,6 @@ class ExponentialWarmup(BaseScheduler):
             current = np.clip(self.step_num, 0.0, self.rampup_length)
             phase = 1.0 - current / self.rampup_length
             return float(np.exp(self.exponent * phase * phase))
-
-    def _get_lr(self):
-        return self.max_lr * self._get_scaling_factor()
 
 
 def update_ema(net, ema_net, step, ema_factor):

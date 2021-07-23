@@ -9,7 +9,6 @@ from time import time
 from datetime import datetime
 import warnings
 import argparse
-import matplotlib
 from pathlib import Path
 
 from utils.model import *
@@ -17,14 +16,12 @@ from utils.dataset import *
 from utils.utils import *
 from utils.settings import *
 from utils.data_aug import *
-from utils.evaluation_measures import compute_per_intersection_macro_f1, compute_psds_from_operating_points
+from utils.evaluation_measures import *
 
 
 def main(iteration=None):
-    inittime = time()
     print("="*50 + "start!!!!" + "="*50)
-    matplotlib.rcParams['agg.path.chunksize'] = 10000
-    parser = argparse.ArgumentParser(description="gpu_selection")
+    parser = argparse.ArgumentParser(description="hyperparameters")
     parser.add_argument('--model', default=1, type=int, help='selection of model setting from the paper')
     parser.add_argument('--gpu', default=0, type=int, help='selection of gpu when you run separate trainings on single server')
     args = parser.parse_args()
@@ -48,7 +45,7 @@ def main(iteration=None):
     logger = get_logger(configs["generals"]["save_folder"])
 
     #torch information
-    logger.info(datetime.now())
+    logger.info("date & time of start is : " + str(datetime.now()).split('.')[0])
     logger.info("torch version is: " + str(torch.__version__))
     device = torch.device("cuda:%d" % args.gpu if torch.cuda.is_available() else "cpu")
     train_cfg["device"] = device
@@ -100,9 +97,7 @@ def main(iteration=None):
     train_cfg["optimizer"] = optim.Adam(train_cfg["net"].parameters(), 1e-3, betas=(0.9, 0.999))
     warmup_steps = train_cfg["n_epochs_warmup"] * len(train_cfg["trainloader"])
     train_cfg["scheduler"] = ExponentialWarmup(train_cfg["optimizer"], configs["opt"]["lr"], warmup_steps)
-
-    printing_epoch, printing_test = get_printings(train_cfg)
-    logger.info("   setup took %.2f mins" % ((time()-inittime)/60))
+    printing_epoch, printing_test = get_printings()
 
     ##############################                TRAIN/VALIDATION                ##############################
     if not (train_cfg["test_only"] or configs["generals"]["ensemble_avg"]):
@@ -155,7 +150,7 @@ def main(iteration=None):
                     % test_returns)
 
 
-    logger.info(datetime.now())
+    logger.info("date & time of end is : " + str(datetime.now()).split('.')[0])
     logging.shutdown()
     print("<"*30 + "DONE!" + ">"*30)
 

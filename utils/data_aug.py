@@ -1,3 +1,4 @@
+#Some codes are adopted from https://github.com/DCASE-REPO/DESED_task
 import torch
 import numpy as np
 import random
@@ -83,7 +84,7 @@ def feature_transformation(features, n_transform, choice, filter_db_range, filte
         for _ in range(n_transform):
             features_temp = features
             if choice[0]:
-                features_temp = rand_filter(features_temp, db_range=filter_db_range, n_bands=filter_bands,
+                features_temp = filt_aug(features_temp, db_range=filter_db_range, n_bands=filter_bands,
                                             print_params=print_params)
             if choice[1]:
                 features_temp = freq_mask(features_temp, mask_ratio=freq_mask_ratio, print_params=print_params)
@@ -93,7 +94,7 @@ def feature_transformation(features, n_transform, choice, filter_db_range, filte
         return feature_list
     elif n_transform == 1:
         if choice[0]:
-            features = rand_filter(features, db_range=filter_db_range, n_bands=filter_bands, print_params=print_params)
+            features = filt_aug(features, db_range=filter_db_range, n_bands=filter_bands, print_params=print_params)
         if choice[1]:
             features = freq_mask(features, mask_ratio=freq_mask_ratio, print_params=print_params)
         if choice[2]:
@@ -103,7 +104,7 @@ def feature_transformation(features, n_transform, choice, filter_db_range, filte
         return [features, features]
 
 
-def rand_filter(features, db_range=(-9, 9), n_bands=(2, 5), print_params=False):
+def filt_aug(features, db_range=(-9, 9), n_bands=(2, 5), print_params=False):
     # this is FilterAugment algorithm
     batch_size, n_freq_bin, _ = features.shape
     n_freq_band = torch.randint(low=n_bands[0], high=n_bands[1], size=(1,)).item()   # [low, high)
@@ -112,7 +113,6 @@ def rand_filter(features, db_range=(-9, 9), n_bands=(2, 5), print_params=False):
                                       torch.sort(torch.randint(1, n_freq_bin-1, (n_freq_band - 1, )))[0],
                                       torch.tensor([n_freq_bin])))
         band_factors = torch.rand((batch_size, n_freq_band)).to(features) * (db_range[1] - db_range[0]) + db_range[0]
-
 
         if print_params:
             print("n_freq_band: " + str(n_freq_band))
@@ -136,13 +136,12 @@ def freq_mask(features, mask_ratio=16, print_params=False):
         f_width = 1
     else:
         f_width = torch.randint(low=1, high=max_mask, size=(1,))[0]   # [low, high)
-
-    # f_width = 30   # [low, high)
-
     f_low = torch.randint(low=0, high=n_freq-f_width, size=(1,))
+
     if print_params:
         print("f_width: " + str(f_width))
         print("f_low: " + str(f_low))
+
     features[:, f_low:f_low+f_width, :] = 0
     return features
 
@@ -152,9 +151,10 @@ def add_noise(features, snrs=(15, 30), dims=(1, 2), print_params=False):
         snr = (snrs[0] - snrs[1]) * torch.rand((features.shape[0],), device=features.device).reshape(-1, 1, 1) + snrs[1]
     else:
         snr = snrs
-    #snr = torch.tensor([90, 6]).reshape(-1, 1, 1).to(features)
+
     if print_params:
         print("snr: " + str(snr))
+
     snr = 10 ** (snr / 20)
     sigma = torch.std(features, dim=dims, keepdim=True) / snr
     return features + torch.randn(features.shape, device=features.device) * sigma
