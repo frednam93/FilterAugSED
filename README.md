@@ -45,6 +45,7 @@ Model | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
 ------|----------------|----------------|-----------------
 1     | 0.408          | 0.628          | 49.0%
 2     | 0.414          | 0.608          | 49.2%
+
 results on model 3 and 4 will be updated soon.
 
 ## Reference
