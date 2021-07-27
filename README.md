@@ -1,18 +1,19 @@
 # Sound Event Detection with FilterAugment
 
 Official implementation of **Heavily Augmented Sound Event Detection utilizing Weak Predictions**<br>
-by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-Min Choi, Yong-Hwa Park @ Human Lab, Mechanical Engineering Department, KAIST
+by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-Min Choi, Yong-Hwa Park @ [Human Lab](http://human.kaist.ac.kr/), Mechanical Engineering Department, KAIST
 
 Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results).
 
 Paper is available in [arxiv](https://arxiv.org/abs/2107.03649) and [DCASE Technical report](http://dcase.community/documents/challenge2021/technical_reports/DCASE2021_Nam_41_t4.pdf).
 
 ## FilterAugment
-Filter Augment is an original data augmentation method for audio/speech representation learning. It randomly devides frequency domain into several bands, and then apply different amplitudes on each band. For more detail, refer to the paper mentioned above.<br>
+Filter Augment is a data augmentation method newly proposed on the above paper, for audio/speech representation learning. It randomly divides frequency domain into several bands, and then apply different amplitude amplification/reduction on each band. For more detail, refer to the paper mentioned above.<br>
 ![](./utils/FilterAugment_example.png)<br>
 - This example shows FilterAugment applied on log-mel spectrogram of a 10-second audio clip. There are 3 frequency bands, and the low-frequency band(0 ~ 1kHz) is amplified, mid-frequency band(1 ~ 2.5kHz)is diminished while high-frequency band(2.5 ~ 8kHz) is just slightly diminished.
 
-## Requirements and versions used
+## Requirements
+Python version of 3.7.10 is used with following libraries
 - pytorch==1.8.0
 - pytorch-lightning==1.2.4
 - pytorchaudio==0.8.0
@@ -22,8 +23,8 @@ Filter Augment is an original data augmentation method for audio/speech represen
 - other requrements in [requirements.txt](./requirements.txt)
 
 
-## Dataset
-You can download dataset by reffering to [DCASE 2021 Task 4 description page](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments) or [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task). Then, set the dataset directories in config.yaml accordingly. You will need DESED real datasets (weak/unlabeled in domain/validation/public eval) and DESED synthetic datasets (train/validation).
+## Datasets
+You can download datasets by reffering to [DCASE 2021 Task 4 description page](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments) or [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task). Then, set the dataset directories in [config yaml files](./configs/) accordingly. You need DESED real datasets (weak/unlabeled in domain/validation/public eval) and DESED synthetic datasets (train/validation).
 
 ## Training
 You can train and save model in `exps` folder by running:
@@ -31,18 +32,20 @@ You can train and save model in `exps` folder by running:
 python main.py
 ```
 
-#### Results:
-
-Dataset              | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
----------------------|----------------|----------------|-----------------
-DESED Real Validation| 0.408          | 0.628          | 49.0%
-
-#### other model settings:
-In the paper mentioned above, there are 4 models. Default hyperparameter setting is set as [configs/config_model1.yaml](./configs/config_model1.yaml). If you want to train model 2~4 from the paper, you can run the following code instead to select config files for other models' hyperparameter settings.
+#### model settings:
+There are 4 model settings in the paper mentioned above. Default hyperparameter setting is set as [model1](./configs/config_model1.yaml), so running the code above will train model 1. To train model [2](./configs/config_model2.yaml), [3](./configs/config_model3.yaml) or [4](./configs/config_model4.yaml) from the paper, you can run the following code instead.
 ```shell
 # for example, to train model 3:
 python main.py --model 3
 ```
+
+#### Results on DESED Real Validation dataset:
+
+Model | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
+------|----------------|----------------|-----------------
+1     | 0.408          | 0.628          | 49.0%
+2     | 0.414          | 0.608          | 49.2%
+results on model 3 and 4 will be updated soon.
 
 ## Reference
 [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task)
