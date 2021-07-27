@@ -160,8 +160,8 @@ def to_mono(wav, rand_ch=False):
 
 def pad_wav(wav, pad_to, encoder):
     if len(wav) < pad_to:
-        wav = np.pad(wav, (0, pad_to - len(wav)), mode="constant")
         pad_from = len(wav)
+        wav = np.pad(wav, (0, pad_to - len(wav)), mode="constant")
     else:
         wav = wav[:pad_to]
         pad_from = pad_to
