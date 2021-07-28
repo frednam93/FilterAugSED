@@ -46,8 +46,8 @@ Model | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
 1     | 0.408          | 0.628          | 49.0%
 2     | 0.414          | 0.608          | 49.2%
 3     | 0.381          | 0.660          | 31.8%
+4     | 0.052          | 0.783          | 19.8%
 
-results on model 4 will be updated soon.
 
 ## Reference
 [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task)
