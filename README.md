@@ -3,9 +3,12 @@
 Official implementation of **Heavily Augmented Sound Event Detection utilizing Weak Predictions**<br>
 by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-Min Choi, Yong-Hwa Park @ [Human Lab](http://human.kaist.ac.kr/), Mechanical Engineering Department, KAIST
 
-Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results).
+[![arXiv](https://img.shields.io/badge/arxiv-2107.03649-brightgreen)](https://arxiv.org/abs/2107.03649)
+[![DCASE](https://img.shields.io/badge/DCASE-technical%20report-orange)](https://arxiv.org/abs/2107.03649)
 
-Paper is available in [arxiv](https://arxiv.org/abs/2107.03649) and [DCASE Technical report](http://dcase.community/documents/challenge2021/technical_reports/DCASE2021_Nam_41_t4.pdf).
+
+
+Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results).
 
 ## FilterAugment
 Filter Augment is a data augmentation method newly proposed on the above paper, for audio/speech representation learning. It randomly divides frequency domain into several bands, and then apply different amplitude amplification/reduction on each band. For more detail, refer to the paper mentioned above.<br>
