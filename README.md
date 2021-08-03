@@ -4,7 +4,7 @@ Official implementation of **Heavily Augmented Sound Event Detection utilizing W
 by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-Min Choi, Yong-Hwa Park @ [Human Lab](http://human.kaist.ac.kr/), Mechanical Engineering Department, KAIST
 
 [![arXiv](https://img.shields.io/badge/arxiv-2107.03649-brightgreen)](https://arxiv.org/abs/2107.03649)
-[![DCASE](https://img.shields.io/badge/DCASE-technical%20report-orange)](https://arxiv.org/abs/2107.03649)
+[![DCASE](https://img.shields.io/badge/DCASE-technical%20report-orange)](http://dcase.community/documents/challenge2021/technical_reports/DCASE2021_Nam_41_t4.pdf)
 
 
 
