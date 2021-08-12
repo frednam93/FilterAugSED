@@ -55,7 +55,6 @@ def mixup(features, label=None, permutation=None, c=None, alpha=0.2, beta=0.2, m
 
 
 def time_mask(features, labels=None, net_pooling=None, mask_ratios=(10, 20), print_params=False):
-    # mask ratio=(40, 80)
     if labels is not None:
         _, _, n_frame = labels.shape
         t_width = torch.randint(low=int(n_frame/mask_ratios[1]), high=int(n_frame/mask_ratios[0]), size=(1,))   # [low, high)
@@ -130,19 +129,20 @@ def filt_aug(features, db_range=(-9, 9), n_bands=(2, 5), print_params=False):
 
 
 def freq_mask(features, mask_ratio=16, print_params=False):
-    _, n_freq, _ = features.shape
-    max_mask = int(n_freq/mask_ratio)
+    batch_size, n_freq_bin, _ = features.shape
+    max_mask = int(n_freq_bin/mask_ratio)
     if max_mask == 1:
-        f_width = 1
+        f_widths = torch.ones(batch_size)
     else:
-        f_width = torch.randint(low=1, high=max_mask, size=(1,))[0]   # [low, high)
-    f_low = torch.randint(low=0, high=n_freq-f_width, size=(1,))
+        f_widths = torch.randint(low=1, high=max_mask, size=(batch_size,))   # [low, high)
 
-    if print_params:
-        print("f_width: " + str(f_width))
-        print("f_low: " + str(f_low))
-
-    features[:, f_low:f_low+f_width, :] = 0
+    for i in range(batch_size):
+        f_width = f_widths[i]
+        f_low = torch.randint(low=0, high=n_freq_bin-f_width, size=(1,))
+        if print_params:
+            print("f_width: " + str(f_width))
+            print("f_low: " + str(f_low))
+        features[i, f_low:f_low+f_width, :] = 0
     return features
 
 

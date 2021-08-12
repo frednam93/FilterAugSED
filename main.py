@@ -70,7 +70,6 @@ def main(iteration=None):
 
     #set encoder
     train_cfg["encoder"] = get_encoder(LabelDict, feature_cfg, feature_cfg["audio_max_len"])
-    train_cfg["encoder300"] = get_encoder(LabelDict, feature_cfg, 300)
 
     #set Dataloaders
     train_cfg = get_mt_datasets(configs, server_cfg, train_cfg)
