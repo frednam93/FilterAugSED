@@ -15,6 +15,8 @@ Filter Augment is a data augmentation method newly proposed on the above paper, 
 ![](./utils/FilterAugment_example.png)<br>
 - This example shows FilterAugment applied on log-mel spectrogram of a 10-second audio clip. There are 3 frequency bands, and the low-frequency band(0 ~ 1kHz) is amplified, mid-frequency band(1 ~ 2.5kHz)is diminished while high-frequency band(2.5 ~ 8kHz) is just slightly diminished.
 
+To check the FilterAugment code, refer to [utils/data_aug.py](./utils/data_aug.py)
+
 ## Requirements
 Python version of 3.7.10 is used with following libraries
 - pytorch==1.8.0
