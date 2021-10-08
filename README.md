@@ -1,17 +1,19 @@
 # Sound Event Detection with FilterAugment
 
-Official implementation of **Heavily Augmented Sound Event Detection utilizing Weak Predictions**<br>
-by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-Min Choi, Yong-Hwa Park @ [Human Lab](http://human.kaist.ac.kr/), Mechanical Engineering Department, KAIST
-
-[![arXiv](https://img.shields.io/badge/arXiv-2107.03649-brightgreen)](https://arxiv.org/abs/2107.03649)
-[![DCASE](https://img.shields.io/badge/DCASE-technical%20report-orange)](http://dcase.community/documents/challenge2021/technical_reports/DCASE2021_Nam_41_t4.pdf)
-
-
+Official implementation of <br>
+ - **Heavily Augmented Sound Event Detection utilizing Weak Predictions** (DCASE2021 Challenge Task 4 technical report) <br>
+by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-Min Choi, Yong-Hwa Park <br>
+[![DCASE](https://img.shields.io/badge/DCASE-technical%20report-orange)](http://dcase.community/documents/challenge2021/technical_reports/DCASE2021_Nam_41_t4.pdf) 
+[![arXiv](https://img.shields.io/badge/arXiv-2107.03649-brightgreen)](https://arxiv.org/abs/2107.03649)<br>
+ - **FilterAugment: An Acoustic Environmental Data Augmentation Method** (Submitted to ICASSP 2022) <br>
+by Hyeonuk Nam, Seong-Hu Kim, Yong-Hwa Park <br>
+[![arXiv](https://img.shields.io/badge/arXiv-2110.03282-brightgreen)](https://arxiv.org/abs/2110.03282) <br>
+implementation of this paper will be updated soon!
 
 Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results).
 
 ## FilterAugment
-Filter Augment is a data augmentation method newly proposed on the above paper, for audio/speech representation learning. It randomly divides frequency domain into several bands, and then apply different amplitude amplification/reduction on each band. For more detail, refer to the paper mentioned above.<br>
+Filter Augment is an audio data augmentation method newly proposed on the above papers for training acoustic models in audio/speech tasks. It applies random weights on randomly selected frequency bands. For more details, refer to the papers mentioned above.<br>
 ![](./utils/FilterAugment_example.png)<br>
 - This example shows FilterAugment applied on log-mel spectrogram of a 10-second audio clip. There are 3 frequency bands, and the low-frequency band(0 ~ 1kHz) is amplified, mid-frequency band(1 ~ 2.5kHz)is diminished while high-frequency band(2.5 ~ 8kHz) is just slightly diminished.
 
@@ -25,7 +27,9 @@ Python version of 3.7.10 is used with following libraries
 - scipy==1.4.1
 - pandas==1.1.3
 - numpy==1.19.2
-- other requrements in [requirements.txt](./requirements.txt)
+
+
+other requrements in [requirements.txt](./requirements.txt)
 
 
 ## Datasets
@@ -58,16 +62,23 @@ Model | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
 [DCASE 2021 Task 4 baseline](https://github.com/DCASE-REPO/DESED_task)
 
 ## Citation & Contact
-If this repository helped your research, please cite the paper below!(will be updated soon)
+If this repository helped your works, please cite papers below!(will be updated soon)
 ```bib
-@misc{nam2021heavily,
-      title={Heavily Augmented Sound Event Detection utilizing Weak Predictions}, 
-      author={Hyeonuk Nam and Byeong-Yun Ko and Gyeong-Tae Lee and Seong-Hu Kim and Won-Ho Jung and Sang-Min Choi and Yong-Hwa Park},
-      year={2021},
-      eprint={2107.03649},
-      archivePrefix={arXiv},
-      primaryClass={eess.AS}
+@techreport{Nam2021,
+    Author = "Nam, Hyeonuk and Ko, Byeong-Yun and Lee, Gyeong-Tae and Kim, Seong-Hu and Jung, Won-Ho and Choi, Sang-Min and Park, Yong-Hwa",
+    title = "Heavily Augmented Sound Event Detection utilizing Weak Predictions",
+    institution = "DCASE2021 Challenge",
+    year = "2021",
+    month = "June",
 }
+
+@article{nam2021filteraugment,
+  title={FilterAugment: An Acoustic Environmental Data Augmentation Method},
+  author={Hyeonuk Nam and Seoung-Hu Kim and Yong-Hwa Park},
+  journal={arXiv preprint arXiv:2107.13260},
+  year={2021}
+}
+
 ```
 Please contact Hyeonuk Nam at frednam@kaist.ac.kr for any query.
 
