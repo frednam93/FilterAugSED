@@ -36,9 +36,12 @@ training:
   transform:                           # hyperparameters for data augmentations that do not alter the label information.
     n_transform: 2                     # 0: no augmentation below is applied. 1: same augmentation below is applied on student/teacher model input. 2: different augmentations below is applied on student/teacher model input.
     choice: [ 1, 0, 0 ]                # apply the chosen data augmentations: [ FilterAugment, freq_mask, add_noise ]
+    filtaug_choice: "dcase"           # choose FilterAugment algorithm between "dcase" and "icassp" according to paper you are refering
     filter_db_range: [ -7.5, 6 ]       # db range of FilterAugment to be applied on each band
     filter_bands: [ 2, 4 ]             # range of frequency band number in FilterAugment
-    freq_mask_ratio: 32                # maximum ratio of freuqnecy masking range. max 1/32 of total frequnecy number will be masked
+    filter_minimum_bandwidth: 1
+    filter_type: step
+    freq_mask_ratio: 16                # maximum ratio of freuqnecy masking range. max 1/16 of total frequnecy number will be masked
     noise_snrs: [ 35, 40 ]             # snr of original signal wrpt the noise added.
 
 feature:

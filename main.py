@@ -22,12 +22,12 @@ from utils.evaluation_measures import *
 def main(iteration=None):
     print("="*50 + "start!!!!" + "="*50)
     parser = argparse.ArgumentParser(description="hyperparameters")
-    parser.add_argument('--model', default=1, type=int, help='selection of model setting from the paper')
+    parser.add_argument('--config', default="icassp", type=str, help='selection of configuration file')
     parser.add_argument('--gpu', default=0, type=int, help='selection of gpu when you run separate trainings on single server')
     args = parser.parse_args()
 
     #set configurations
-    configs, server_cfg, train_cfg, feature_cfg = get_configs(config_dir="./configs/config_model%d.yaml" % args.model)
+    configs, server_cfg, train_cfg, feature_cfg = get_configs(config_dir="./configs/config_%s.yaml" % args.config)
 
     #declare test_only/debugging mode
     if train_cfg["test_only"]:
@@ -51,7 +51,7 @@ def main(iteration=None):
     train_cfg["device"] = device
     logger.info("device: " + str(device))
     train_cfg["n_gpu"] = torch.cuda.device_count()
-    logger.info("model selection: model %d" % args.model)
+    logger.info("configuration selection: %s" % args.config)
     logger.info("number of GPUs: " + str(train_cfg["n_gpu"]))
 
     #seed
@@ -70,6 +70,7 @@ def main(iteration=None):
 
     #set encoder
     train_cfg["encoder"] = get_encoder(LabelDict, feature_cfg, feature_cfg["audio_max_len"])
+    train_cfg["encoder300"] = get_encoder(LabelDict, feature_cfg, 300)
 
     #set Dataloaders
     train_cfg = get_mt_datasets(configs, server_cfg, train_cfg)
