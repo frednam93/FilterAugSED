@@ -23,6 +23,7 @@ Filter Augment is an audio data augmentation method newly proposed on the above 
 - Step type FilterAugment shows several frequency bands that are uniformly increased or decreased in amplitude, while linear type FilterAugment shows continous filter that shows certain peaks and dips.
 - On our participation on [DCASE2021 challenge task 4](https://arxiv.org/abs/2107.03649), we used prototype FilterAugment which is step type FilterAugment without hyperparameter *minimum bandwith*. The code for this prototype is defiend as "filt_aug_dcase" at [utils/data_aug.py](./utils/data_aug.py) @ line 107
 - Code for updated FilterAugment including step and linear type for [ICASSP submission](https://arxiv.org/abs/2110.03282) is defiend as "filt_aug_icassp" at [utils/data_aug.py](./utils/data_aug.py) @ line 126
+  - filt_aug_icassp will be updated soon!
 
 
 ## Requirements
@@ -49,6 +50,7 @@ python main.py
 
 #### model settings:
 There are 5 configuration files in this repo. Default setting is (ICASSP setting)(./configs/config_icassp.yaml), the optimal linear type FilterAugment described in [paper submitted to ICASSP](https://arxiv.org/abs/2107.03649). There are 4 other model settings in [DCASE tech report](https://arxiv.org/abs/2107.03649). To train for model [1](./configs/config_model1.yaml), [2](./configs/config_model2.yaml), [3](./configs/config_model3.yaml) or [4](./configs/config_model4.yaml) from the DCASE tech report or [ICASSP setting](./configs/config_icassp.yaml), you can run the following code instead.
+     - ICASSP setting will be updated soon!
 ```shell
 # for example, to train model 3:
 python main.py --confing model3
