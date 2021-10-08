@@ -10,6 +10,8 @@ by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-M
 by Hyeonuk Nam, Seong-Hu Kim, Yong-Hwa Park <br>
 [![arXiv](https://img.shields.io/badge/arXiv-2110.03282-brightgreen)](https://arxiv.org/abs/2110.03282) <br>
 
+   - **Implementation for 2nd paper that includes updated version of FilterAugment is incomplete for now. It will be updated soon!**
+
 Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results).
 
 ## FilterAugment
