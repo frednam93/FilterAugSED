@@ -14,11 +14,12 @@ Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/cha
 
 ## FilterAugment
 Filter Augment is an audio data augmentation method newly proposed on the above papers for training acoustic models in audio/speech tasks. It applies random weights on randomly selected frequency bands. For more details, refer to the papers mentioned above.<br>
-![](./utils/FilterAugment_melspec.png)<br>
+![](./utils/FilterAugment_melspecs.png)<br>
 - This example shows two types of FilterAugment applied on log mel spectrogram of a 10-second audio clip. (a) shows original log mel spectrogram, (b) shows log mel spectrogram applied by step type FilterAugment (c) shows log mel spectrogram applied by linear type Filter Augment.
 - Applied filters are shown below. Filter (d) is applied on (a) to result in (b), and filter (e) is applied on (a) to result in (c)
 
-<img src=./utils/FilterAugment_filter.png align="left" height="238" width="470" > <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+<img src=./utils/FilterAugment_filters.png align="left" height="238" width="470" > <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+
 - Step type FilterAugment shows several frequency bands that are uniformly increased or decreased in amplitude, while linear type FilterAugment shows continous filter that shows certain peaks and dips.
 - On our participation on [DCASE2021 challenge task 4](https://arxiv.org/abs/2107.03649), we used prototype FilterAugment which is step type FilterAugment without hyperparameter *minimum bandwith*. The code for this prototype is defiend as "filt_aug_dcase" at [utils/data_aug.py](./utils/data_aug.py) @ line 107
 - Code for updated FilterAugment including step and linear type for [ICASSP submission](https://arxiv.org/abs/2110.03282) is defiend as "filt_aug_icassp" at [utils/data_aug.py](./utils/data_aug.py) @ line 126
