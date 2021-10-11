@@ -137,7 +137,7 @@ class UnlabeledDataset(Dataset):
 
 def waveform_modification(filepath, pad_to, encoder):
     wav, _ = sf.read(filepath)
-    wav = to_mono(wav)  # 모노채널로바꾸기
+    wav = to_mono(wav)
     wav, pad_mask = pad_wav(wav, pad_to, encoder)
     wav = torch.from_numpy(wav).float()
     wav = normalize_wav(wav)

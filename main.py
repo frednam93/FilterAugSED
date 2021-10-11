@@ -70,7 +70,6 @@ def main(iteration=None):
 
     #set encoder
     train_cfg["encoder"] = get_encoder(LabelDict, feature_cfg, feature_cfg["audio_max_len"])
-    train_cfg["encoder300"] = get_encoder(LabelDict, feature_cfg, 300)
 
     #set Dataloaders
     train_cfg = get_mt_datasets(configs, server_cfg, train_cfg)
@@ -267,6 +266,7 @@ def validation(train_cfg):
     val_stud_buffer = {k: pd.DataFrame() for k in train_cfg["val_thresholds"]}
     val_tch_buffer = {k: pd.DataFrame() for k in train_cfg["val_thresholds"]}
     synth_valid_dir, synth_valid_tsv, synth_valid_dur, weak_dir = train_cfg["valid_tsvs"]
+    rand_plot_idx = random.randint(0, 2499)
     with torch.no_grad():
         tk1 = tqdm(train_cfg["validloader"], total=n_valid, leave=False, desc="validation processing")
         for _, (wavs, labels, pad_mask, indexes, filenames, paths) in enumerate(tk1, 0):
