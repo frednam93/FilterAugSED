@@ -56,7 +56,7 @@ python main.py --confing model3
 
 #### Results of [DCASE settings (model 1~4)](https://arxiv.org/abs/2107.03649) on DESED Real Validation dataset:
 
-Model | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
+Model | PSDS1          | PSDS2          | Collar-based F1
 ------|----------------|----------------|-----------------
 1     | 0.408          | 0.628          | 49.0%
 2     | **0.414**      | 0.608          | 49.2%
@@ -68,7 +68,7 @@ Model | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1
 
 #### Results of [ICASSP settings](https://arxiv.org/abs/2107.03649) on DESED Real Validation dataset:
 
-Methods       | PSDS-scenario1 | PSDS-scenario2 | Collar-based F1  | Intersection-based F1
+Methods       | PSDS1          | PSDS2          | Collar-based F1  | Intersection-based F1
 --------------|----------------|----------------|------------------|-----------------
 w/o FiltAug   | 0.387          | 0.598          | 47.7%            | 70.8%
 step FiltAug  | 0.412          | 0.634          | 47.4%            | 71.2%
