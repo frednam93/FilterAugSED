@@ -77,11 +77,11 @@ def feature_transformation(features, n_transform, choice, filtaug_choice, filter
         for _ in range(n_transform):
             features_temp = features
             if choice[0]:
-                if filtaug_choice == "dcase":
-                    features_temp = filt_aug_dcase(features_temp, db_range=filter_db_range, n_bands=filter_bands)
-                elif filtaug_choice == "icassp":
-                    features_temp = filt_aug_icassp(features_temp, db_range=filter_db_range, n_band=filter_bands,
-                                                    min_bw=filter_minimum_bandwidth, filter_type=filter_type)
+                if filtaug_choice == "prototype":
+                    features_temp = filt_aug_prototype(features_temp, db_range=filter_db_range, n_bands=filter_bands)
+                elif filtaug_choice == "updated":
+                    features_temp = filt_aug(features_temp, db_range=filter_db_range, n_band=filter_bands,
+                                             min_bw=filter_minimum_bandwidth, filter_type=filter_type)
             if choice[1]:
                 features_temp = freq_mask(features_temp, mask_ratio=freq_mask_ratio)
             if choice[2]:
@@ -90,11 +90,11 @@ def feature_transformation(features, n_transform, choice, filtaug_choice, filter
         return feature_list
     elif n_transform == 1:
         if choice[0]:
-            if filtaug_choice == "dcase":
-                features = filt_aug_dcase(features, db_range=filter_db_range, n_bands=filter_bands)
+            if filtaug_choice == "proto":
+                features = filt_aug_prototype(features, db_range=filter_db_range, n_bands=filter_bands)
             elif filtaug_choice == "icassp":
-                features = filt_aug_icassp(features, db_range=filter_db_range, n_band=filter_bands,
-                                           min_bw=filter_minimum_bandwidth, filter_type=filter_type)
+                features = filt_aug(features, db_range=filter_db_range, n_band=filter_bands,
+                                    min_bw=filter_minimum_bandwidth, filter_type=filter_type)
         if choice[1]:
             features = freq_mask(features, mask_ratio=freq_mask_ratio)
         if choice[2]:
@@ -104,7 +104,7 @@ def feature_transformation(features, n_transform, choice, filtaug_choice, filter
         return [features, features]
 
 
-def filt_aug_dcase(features, db_range=(-7.5, 6), n_bands=(2, 5)):
+def filt_aug_prototype(features, db_range=(-7.5, 6), n_bands=(2, 5)):
     # this is FilterAugment algorithm used for DCASE 2021 Challeng Task 4
     batch_size, n_freq_bin, _ = features.shape
     n_freq_band = torch.randint(low=n_bands[0], high=n_bands[1], size=(1,)).item()   # [low, high)
@@ -123,7 +123,7 @@ def filt_aug_dcase(features, db_range=(-7.5, 6), n_bands=(2, 5)):
         return features
 
 
-def filt_aug_icassp(features, db_range=[-6, 6], n_band=[3, 6], min_bw=6, filter_type="linear"):
+def filt_aug(features, db_range=[-6, 6], n_band=[3, 6], min_bw=6, filter_type="linear"):
     # this is updated FilterAugment algorithm used for ICASSP 2022
     if not isinstance(filter_type, str):
         if torch.rand(1).item() < filter_type:

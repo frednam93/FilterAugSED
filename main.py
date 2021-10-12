@@ -22,7 +22,7 @@ from utils.evaluation_measures import *
 def main(iteration=None):
     print("="*50 + "start!!!!" + "="*50)
     parser = argparse.ArgumentParser(description="hyperparameters")
-    parser.add_argument('--config', default="icassp", type=str, help='selection of configuration file')
+    parser.add_argument('--config', default="updated_filtaug", type=str, help='selection of configuration file')
     parser.add_argument('--gpu', default=0, type=int, help='selection of gpu when you run separate trainings on single server')
     args = parser.parse_args()
 
