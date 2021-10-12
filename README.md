@@ -56,24 +56,24 @@ python main.py --confing dcase_model3
 
 #### Results of prototype FilterAugment with [DCASE settings (model 1~4)](https://arxiv.org/abs/2107.03649) on DESED Real Validation dataset:
 
-Model                  | PSDS1          | PSDS2          | Collar-based F1
------------------------|----------------|----------------|-----------------
+Model                                                                    | PSDS1          | PSDS2          | Collar-based F1
+-------------------------------------------------------------------------|----------------|----------------|-----------------
 [DCASE2021 Task4 baseline](https://github.com/DCASE-REPO/DESED_task)     | 0.353          | 0.553          | 42.1%
-proto-FiltAug model 1     | 0.408          | 0.628          | 49.0%
-proto-FiltAug model 2     | **0.414**      | 0.608          | 49.2%
-proto-FiltAug model 3     | 0.381          | 0.660          | 31.8%
-proto-FiltAug model 4     | 0.052          | **0.783**      | 19.8%
+proto-FiltAug model 1                                                    | 0.408          | 0.628          | 49.0%
+proto-FiltAug model 2                                                    | **0.414**      | 0.608          | 49.2%
+proto-FiltAug model 3                                                    | 0.381          | 0.660          | 31.8%
+proto-FiltAug model 4                                                    | 0.052          | **0.783**      | 19.8%
 
    - These results are based on train models with single run for each setting
 
 
 #### Results of updated FilterAugment with [ICASSP settings](https://arxiv.org/abs/2107.03649) on DESED Real Validation dataset:
 
-Model       | PSDS1          | PSDS2          | Collar-based F1  | Intersection-based F1
---------------|----------------|----------------|------------------|-----------------
-w/o FiltAug   | 0.387          | 0.598          | 47.7%            | 70.8%
-step FiltAug  | 0.412          | 0.634          | 47.4%            | 71.2%
-linear FiltAug| **0.413**      | **0.636**      | **49.0%**        | **73.5%**
+Model                   | PSDS1          | PSDS2          | Collar-based F1  | Intersection-based F1
+------------------------|----------------|----------------|------------------|-----------------
+w/o FiltAug             | 0.387          | 0.598          | 47.7%            | 70.8%
+optimized step FiltAug  | 0.412          | 0.634          | 47.4%            | 71.2%
+optimized linear FiltAug| **0.413**      | **0.636**      | **49.0%**        | **73.5%**
 
    - These results are based on max values of each metric for 3 separate runs on each setting (refer to paper for details).
 
