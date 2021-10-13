@@ -3,12 +3,12 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 import pytorch_lightning as pl
 
-
 import logging
 import pickle
 import yaml
 from copy import deepcopy
 from collections import OrderedDict
+from pathlib import Path
 
 from utils.utils import *
 from utils.model import *
@@ -35,6 +35,9 @@ def get_save_directories(configs, train_cfg, iteration, args):
     save_folder = general_cfg["save_folder"]
     savepsds = general_cfg["savepsds"]
 
+    parent_folder = str(Path(save_folder).parent)
+    while not os.path.isdir(parent_folder):
+        os.mkdir(parent_folder)
     # set save folder
     if save_folder.count("new_exp") > 0:
         save_folder = save_folder + '_gpu:' + str(args.gpu)
