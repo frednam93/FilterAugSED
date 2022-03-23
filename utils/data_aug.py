@@ -90,9 +90,9 @@ def feature_transformation(features, n_transform, choice, filtaug_choice, filter
         return feature_list
     elif n_transform == 1:
         if choice[0]:
-            if filtaug_choice == "proto":
+            if filtaug_choice == "prototype":
                 features = filt_aug_prototype(features, db_range=filter_db_range, n_bands=filter_bands)
-            elif filtaug_choice == "icassp":
+            elif filtaug_choice == "updated":
                 features = filt_aug(features, db_range=filter_db_range, n_band=filter_bands,
                                     min_bw=filter_minimum_bandwidth, filter_type=filter_type)
         if choice[1]:
