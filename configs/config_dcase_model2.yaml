@@ -25,7 +25,6 @@ training:
   decode_weak_valid: 0                 # weak prediction masking on strong prediction,
   decode_weak_test: 1                  # 0: no weak prediction used, 1: weak prediction masking, 2: weak SED
   trainweak_only: False                # train the model without strong dataset
-  trainweak_withstrong: False          # get weak classification from weak prediction of strong dataset
   afl_loss:                            # antisymmetrical focal loss. None if you wanna use BCE loss. if you want AFL, try [gamma, zeta]
   median_window: 5                     # length of median filter used to smooth prediction in inference
 

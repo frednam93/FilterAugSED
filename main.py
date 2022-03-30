@@ -174,8 +174,6 @@ def train(train_cfg):
         mask_weak = torch.zeros(batch_num).to(features).bool()
         mask_weak[strong_bs:(strong_bs + weak_bs)] = 1  # mask_weak size = [bs]
         labels_weak = (torch.sum(labels[mask_weak], -1) > 0).float() # labels_weak size = [bs, n_class] (weak data only)
-        if train_cfg["trainweak_withstrong"]:
-            labels_weak_strong = (torch.sum(labels[mask_strong], 2) > 0).float()
 
         # frame_shift
         features, labels = frame_shift(features, labels, train_cfg["net_pooling"])
@@ -186,14 +184,8 @@ def train(train_cfg):
             features[mask_weak], labels_weak = mixup(features[mask_weak], labels_weak,
                                                      mixup_label_type=train_cfg["mixup_type"])
             # strong data mixup                    # weak_masked feature size = [bs_weak, freq, frames]
-            if train_cfg["trainweak_withstrong"]:
-                features[mask_strong], labels[mask_strong], c, perm = mixup(features[mask_strong], labels[mask_strong],
-                                                                            mixup_label_type=train_cfg["mixup_type"],
-                                                                            returnc=True)
-                labels_weak_strong = mixup(labels_weak_strong, permutation=perm, c=c)
-            else:
-                features[mask_strong], labels[mask_strong] = mixup(features[mask_strong], labels[mask_strong],
-                                                                   mixup_label_type=train_cfg["mixup_type"])
+            features[mask_strong], labels[mask_strong] = mixup(features[mask_strong], labels[mask_strong],
+                                                               mixup_label_type=train_cfg["mixup_type"])
         # Time masking
         features[mask_strong], labels[mask_strong] = time_mask(features[mask_strong], labels[mask_strong],
                                                                train_cfg["net_pooling"],
@@ -212,12 +204,7 @@ def train(train_cfg):
         # classification losses                    # strong masked label size = [bs_strong, n_class, frames]
         loss_class_strong = train_cfg["criterion_class"](strong_pred_stud[mask_strong],
                                                          labels[mask_strong])
-        if train_cfg["trainweak_withstrong"]:  # train with weak predictions from strong + weak dataset
-            loss_class_weak = train_cfg["criterion_class"](torch.cat((weak_pred_stud[mask_strong],
-                                                                      weak_pred_stud[mask_weak]), -1),
-                                                           torch.cat((labels_weak_strong, labels_weak), -1))
-        else:  # train with weak predictions from weak dataset only
-            loss_class_weak = train_cfg["criterion_class"](weak_pred_stud[mask_weak], labels_weak)
+        loss_class_weak = train_cfg["criterion_class"](weak_pred_stud[mask_weak], labels_weak)
 
         # consistency losses
         loss_cons_strong = train_cfg["criterion_cons"](strong_pred_stud, strong_pred_tch.detach())
@@ -277,14 +264,10 @@ def validation(train_cfg):
             strong_pred_stud, weak_pred_stud = train_cfg["net"](logmels)
             strong_pred_tch, weak_pred_tch = train_cfg["ema_net"](logmels)
 
-            if not train_cfg["trainweak_withstrong"]:
-                mask_weak = (torch.tensor([str(Path(x).parent) == str(Path(weak_dir)) for x in paths])
-                             .to(logmels).bool())
-                mask_strong = (torch.tensor([str(Path(x).parent) == str(Path(synth_valid_dir)) for x in paths])
-                               .to(logmels).bool())
-            else:
-                mask_weak = torch.ones(labels.size(0)).to(logmels).bool()
-                mask_strong = torch.zeros(labels.size(0)).to(logmels).bool()
+            mask_weak = (torch.tensor([str(Path(x).parent) == str(Path(weak_dir)) for x in paths])
+                         .to(logmels).bool())
+            mask_strong = (torch.tensor([str(Path(x).parent) == str(Path(synth_valid_dir)) for x in paths])
+                           .to(logmels).bool())
 
 
             if torch.any(mask_weak):
