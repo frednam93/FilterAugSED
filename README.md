@@ -10,7 +10,9 @@ by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-M
 by Hyeonuk Nam, Seong-Hu Kim, Yong-Hwa Park <br>
 [![arXiv](https://img.shields.io/badge/arXiv-2110.03282-brightgreen)](https://arxiv.org/abs/2110.03282) <br>
 
-Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results), and accepted to [ICASSP 2022](https://2022.ieeeicassp.org/).
+Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results), and accepted to [ICASSP 2022](https://2022.ieeeicassp.org/).c
+
+Also, refer to [Frequency Dynamic Convolution SED](https://github.com/frednam93/FDY-SED) which is upgraded SED model from this work!
 
 ## FilterAugment
 Filter Augment is an audio data augmentation method newly proposed on the above papers for training acoustic models in audio/speech tasks. It applies random weights on randomly selected frequency bands. For more details, refer to the papers mentioned above.<br>
