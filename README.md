@@ -87,7 +87,7 @@ optimized linear FiltAug| **0.413**      | **0.636**      | **49.0%**        | *
 ## Citation & Contact
 If this repository helped your works, please cite papers below!
 ```bib
-@techreport{Nam2021,
+@techreport{nam2021heavilyaugmnetedsed,
     Author = "Nam, Hyeonuk and Ko, Byeong-Yun and Lee, Gyeong-Tae and Kim, Seong-Hu and Jung, Won-Ho and Choi, Sang-Min and Park, Yong-Hwa",
     title = "Heavily Augmented Sound Event Detection utilizing Weak Predictions",
     institution = "DCASE2021 Challenge",
