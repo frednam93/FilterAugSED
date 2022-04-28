@@ -101,7 +101,9 @@ If this repository helped your works, please cite papers below!
     title={Filteraugment: An Acoustic Environmental Data Augmentation Method}, 
     year={2022},
     pages={4308-4312},
-    doi={10.1109/ICASSP43922.2022.9747680}}
+    doi={10.1109/ICASSP43922.2022.9747680}
+}
+
 ```
 Please contact Hyeonuk Nam at frednam@kaist.ac.kr for any query.
 
