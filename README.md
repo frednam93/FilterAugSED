@@ -8,6 +8,7 @@ by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-M
        - arXiv version has updates on some minor errors
  - **FilterAugment: An Acoustic Environmental Data Augmentation Method** (Accepted to ICASSP 2022) <br>
 by Hyeonuk Nam, Seong-Hu Kim, Yong-Hwa Park <br>
+[![ICASSP2022](https://img.shields.io/badge/IEEE-ICASSP%202022-informational)](https://ieeexplore.ieee.org/document/9747680) 
 [![arXiv](https://img.shields.io/badge/arXiv-2110.03282-brightgreen)](https://arxiv.org/abs/2110.03282) <br>
 
 Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results), and accepted to [ICASSP 2022](https://2022.ieeeicassp.org/).c
@@ -94,13 +95,15 @@ If this repository helped your works, please cite papers below!
     month = "June",
 }
 
-@article{nam2021filteraugment,
-  title={FilterAugment: An Acoustic Environmental Data Augmentation Method},
-  author={Hyeonuk Nam and Seoung-Hu Kim and Yong-Hwa Park},
-  journal={arXiv preprint arXiv:2107.13260},
-  year={2021}
-}
-
+@INPROCEEDINGS{nam2021filteraugment,
+  author={Nam, Hyeonuk and Kim, Seong-Hu and Park, Yong-Hwa},
+  booktitle={ICASSP 2022 - 2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
+  title={Filteraugment: An Acoustic Environmental Data Augmentation Method}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={4308-4312},
+  doi={10.1109/ICASSP43922.2022.9747680}}
 ```
 Please contact Hyeonuk Nam at frednam@kaist.ac.kr for any query.
 
