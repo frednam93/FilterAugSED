@@ -24,8 +24,8 @@ Filter Augment is an audio data augmentation method newly proposed on the above 
 <img src=./utils/FilterAugment_filters.png align="left" height="238" width="470" > <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
 - Step type FilterAugment shows several frequency bands that are uniformly increased or decreased in amplitude, while linear type FilterAugment shows continous filter that shows certain peaks and dips.
-- On our participation on [DCASE2021 challenge task 4](https://arxiv.org/abs/2107.03649), we used prototype FilterAugment which is step type FilterAugment without hyperparameter *minimum bandwith*. The code for this prototype is defiend as "filt_aug_prototype" at [utils/data_aug.py](./utils/data_aug.py) @ line 107
-- Code for updated FilterAugment including step and linear type for [ICASSP submission](https://arxiv.org/abs/2110.03282) is defiend as "filt_aug" at [utils/data_aug.py](./utils/data_aug.py) @ line 126
+- On our participation on [DCASE2021 challenge task 4](https://arxiv.org/abs/2107.03649), we used prototype FilterAugment which is step type FilterAugment without hyperparameter *minimum bandwith*. The code for this prototype is defiend as "filt_aug_prototype" at [utils/data_aug.py](./utils/data_aug.py) @ line 52
+- **Code for updated FilterAugment including step and linear type for [ICASSP submission](https://arxiv.org/abs/2110.03282) is defiend as "filt_aug" at [utils/data_aug.py](./utils/data_aug.py) @ line 7**
 
 
 ## Requirements
