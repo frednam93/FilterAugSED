@@ -8,9 +8,12 @@ by Hyeonuk Nam, Byeong-Yun Ko, Gyeong-Tae Lee, Seong-Hu Kim, Won-Ho Jung, Sang-M
        - arXiv version has updates on some minor errors
  - **FilterAugment: An Acoustic Environmental Data Augmentation Method** (Accepted to ICASSP 2022) <br>
 by Hyeonuk Nam, Seong-Hu Kim, Yong-Hwa Park <br>
+[![ICASSP2022](https://img.shields.io/badge/IEEE-ICASSP%202022-informational)](https://ieeexplore.ieee.org/document/9747680) 
 [![arXiv](https://img.shields.io/badge/arXiv-2110.03282-brightgreen)](https://arxiv.org/abs/2110.03282) <br>
 
-Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results), and accepted to [ICASSP 2022](https://2022.ieeeicassp.org/).
+Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results), and accepted to [ICASSP 2022](https://2022.ieeeicassp.org/).c
+
+Also, refer to [Frequency Dynamic Convolution SED](https://github.com/frednam93/FDY-SED) which is upgraded SED model from this work!
 
 ## FilterAugment
 Filter Augment is an audio data augmentation method newly proposed on the above papers for training acoustic models in audio/speech tasks. It applies random weights on randomly selected frequency bands. For more details, refer to the papers mentioned above.<br>
@@ -21,8 +24,8 @@ Filter Augment is an audio data augmentation method newly proposed on the above 
 <img src=./utils/FilterAugment_filters.png align="left" height="238" width="470" > <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
 - Step type FilterAugment shows several frequency bands that are uniformly increased or decreased in amplitude, while linear type FilterAugment shows continous filter that shows certain peaks and dips.
-- On our participation on [DCASE2021 challenge task 4](https://arxiv.org/abs/2107.03649), we used prototype FilterAugment which is step type FilterAugment without hyperparameter *minimum bandwith*. The code for this prototype is defiend as "filt_aug_prototype" at [utils/data_aug.py](./utils/data_aug.py) @ line 107
-- Code for updated FilterAugment including step and linear type for [ICASSP submission](https://arxiv.org/abs/2110.03282) is defiend as "filt_aug" at [utils/data_aug.py](./utils/data_aug.py) @ line 126
+- On our participation on [DCASE2021 challenge task 4](https://arxiv.org/abs/2107.03649), we used prototype FilterAugment which is step type FilterAugment without hyperparameter *minimum bandwith*. The code for this prototype is defiend as "filt_aug_prototype" at [utils/data_aug.py](./utils/data_aug.py) @ line 52
+- **Code for updated FilterAugment including step and linear type for [ICASSP submission](https://arxiv.org/abs/2110.03282) is defiend as "filt_aug" at [utils/data_aug.py](./utils/data_aug.py) @ line 7**
 
 
 ## Requirements
@@ -84,7 +87,7 @@ optimized linear FiltAug| **0.413**      | **0.636**      | **49.0%**        | *
 ## Citation & Contact
 If this repository helped your works, please cite papers below!
 ```bib
-@techreport{Nam2021,
+@techreport{nam2021heavilyaugmnetedsed,
     Author = "Nam, Hyeonuk and Ko, Byeong-Yun and Lee, Gyeong-Tae and Kim, Seong-Hu and Jung, Won-Ho and Choi, Sang-Min and Park, Yong-Hwa",
     title = "Heavily Augmented Sound Event Detection utilizing Weak Predictions",
     institution = "DCASE2021 Challenge",
@@ -92,11 +95,13 @@ If this repository helped your works, please cite papers below!
     month = "June",
 }
 
-@article{nam2021filteraugment,
-  title={FilterAugment: An Acoustic Environmental Data Augmentation Method},
-  author={Hyeonuk Nam and Seoung-Hu Kim and Yong-Hwa Park},
-  journal={arXiv preprint arXiv:2107.13260},
-  year={2021}
+@INPROCEEDINGS{nam2021filteraugment,
+    author={Nam, Hyeonuk and Kim, Seong-Hu and Park, Yong-Hwa},
+    booktitle={ICASSP 2022 - 2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
+    title={Filteraugment: An Acoustic Environmental Data Augmentation Method}, 
+    year={2022},
+    pages={4308-4312},
+    doi={10.1109/ICASSP43922.2022.9747680}
 }
 
 ```
