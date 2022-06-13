@@ -4,6 +4,70 @@ import numpy as np
 import random
 
 
+def filt_aug(features, db_range=[-6, 6], n_band=[3, 6], min_bw=6, filter_type="linear"):
+    # this is updated FilterAugment algorithm used for ICASSP 2022
+    if not isinstance(filter_type, str):
+        if torch.rand(1).item() < filter_type:
+            filter_type = "step"
+            n_band = [2, 5]
+            min_bw = 4
+        else:
+            filter_type = "linear"
+            n_band = [3, 6]
+            min_bw = 6
+
+    batch_size, n_freq_bin, _ = features.shape
+    n_freq_band = torch.randint(low=n_band[0], high=n_band[1], size=(1,)).item()   # [low, high)
+    if n_freq_band > 1:
+        while n_freq_bin - n_freq_band * min_bw + 1 < 0:
+            min_bw -= 1
+        band_bndry_freqs = torch.sort(torch.randint(0, n_freq_bin - n_freq_band * min_bw + 1,
+                                                    (n_freq_band - 1,)))[0] + \
+                           torch.arange(1, n_freq_band) * min_bw
+        band_bndry_freqs = torch.cat((torch.tensor([0]), band_bndry_freqs, torch.tensor([n_freq_bin])))
+
+        if filter_type == "step":
+            band_factors = torch.rand((batch_size, n_freq_band)).to(features) * (db_range[1] - db_range[0]) + db_range[0]
+            band_factors = 10 ** (band_factors / 20)
+
+            freq_filt = torch.ones((batch_size, n_freq_bin, 1)).to(features)
+            for i in range(n_freq_band):
+                freq_filt[:, band_bndry_freqs[i]:band_bndry_freqs[i + 1], :] = band_factors[:, i].unsqueeze(-1).unsqueeze(-1)
+
+        elif filter_type == "linear":
+            band_factors = torch.rand((batch_size, n_freq_band + 1)).to(features) * (db_range[1] - db_range[0]) + db_range[0]
+            freq_filt = torch.ones((batch_size, n_freq_bin, 1)).to(features)
+            for i in range(n_freq_band):
+                for j in range(batch_size):
+                    freq_filt[j, band_bndry_freqs[i]:band_bndry_freqs[i+1], :] = \
+                        torch.linspace(band_factors[j, i], band_factors[j, i+1],
+                                       band_bndry_freqs[i+1] - band_bndry_freqs[i]).unsqueeze(-1)
+            freq_filt = 10 ** (freq_filt / 20)
+        return features * freq_filt
+
+    else:
+        return features
+
+
+def filt_aug_prototype(features, db_range=(-7.5, 6), n_bands=(2, 5)):
+    # this is FilterAugment algorithm used for DCASE 2021 Challeng Task 4
+    batch_size, n_freq_bin, _ = features.shape
+    n_freq_band = torch.randint(low=n_bands[0], high=n_bands[1], size=(1,)).item()   # [low, high)
+    if n_freq_band > 1:
+        band_bndry_freqs = torch.cat((torch.tensor([0]),
+                                      torch.sort(torch.randint(1, n_freq_bin-1, (n_freq_band - 1, )))[0],
+                                      torch.tensor([n_freq_bin])))
+        band_factors = torch.rand((batch_size, n_freq_band)).to(features) * (db_range[1] - db_range[0]) + db_range[0]
+        band_factors = 10 ** (band_factors / 20)
+
+        freq_filt = torch.ones((batch_size, n_freq_bin, 1)).to(features)
+        for i in range(n_freq_band):
+            freq_filt[:, band_bndry_freqs[i]:band_bndry_freqs[i+1], :] = band_factors[:, i].unsqueeze(-1).unsqueeze(-1)
+        return features * freq_filt
+    else:
+        return features
+
+
 def frame_shift(features, label=None, net_pooling=None):
     if label is not None:
         batch_size, _, _ = features.shape
@@ -102,70 +166,6 @@ def feature_transformation(features, n_transform, choice, filtaug_choice, filter
         return [features, features]
     else:
         return [features, features]
-
-
-def filt_aug_prototype(features, db_range=(-7.5, 6), n_bands=(2, 5)):
-    # this is FilterAugment algorithm used for DCASE 2021 Challeng Task 4
-    batch_size, n_freq_bin, _ = features.shape
-    n_freq_band = torch.randint(low=n_bands[0], high=n_bands[1], size=(1,)).item()   # [low, high)
-    if n_freq_band > 1:
-        band_bndry_freqs = torch.cat((torch.tensor([0]),
-                                      torch.sort(torch.randint(1, n_freq_bin-1, (n_freq_band - 1, )))[0],
-                                      torch.tensor([n_freq_bin])))
-        band_factors = torch.rand((batch_size, n_freq_band)).to(features) * (db_range[1] - db_range[0]) + db_range[0]
-        band_factors = 10 ** (band_factors / 20)
-
-        freq_filt = torch.ones((batch_size, n_freq_bin, 1)).to(features)
-        for i in range(n_freq_band):
-            freq_filt[:, band_bndry_freqs[i]:band_bndry_freqs[i+1], :] = band_factors[:, i].unsqueeze(-1).unsqueeze(-1)
-        return features * freq_filt
-    else:
-        return features
-
-
-def filt_aug(features, db_range=[-6, 6], n_band=[3, 6], min_bw=6, filter_type="linear"):
-    # this is updated FilterAugment algorithm used for ICASSP 2022
-    if not isinstance(filter_type, str):
-        if torch.rand(1).item() < filter_type:
-            filter_type = "step"
-            n_band = [2, 5]
-            min_bw = 4
-        else:
-            filter_type = "linear"
-            n_band = [3, 6]
-            min_bw = 6
-
-    batch_size, n_freq_bin, _ = features.shape
-    n_freq_band = torch.randint(low=n_band[0], high=n_band[1], size=(1,)).item()   # [low, high)
-    if n_freq_band > 1:
-        while n_freq_bin - n_freq_band * min_bw + 1 < 0:
-            min_bw -= 1
-        band_bndry_freqs = torch.sort(torch.randint(0, n_freq_bin - n_freq_band * min_bw + 1,
-                                                    (n_freq_band - 1,)))[0] + \
-                           torch.arange(1, n_freq_band) * min_bw
-        band_bndry_freqs = torch.cat((torch.tensor([0]), band_bndry_freqs, torch.tensor([n_freq_bin])))
-
-        if filter_type == "step":
-            band_factors = torch.rand((batch_size, n_freq_band)).to(features) * (db_range[1] - db_range[0]) + db_range[0]
-            band_factors = 10 ** (band_factors / 20)
-
-            freq_filt = torch.ones((batch_size, n_freq_bin, 1)).to(features)
-            for i in range(n_freq_band):
-                freq_filt[:, band_bndry_freqs[i]:band_bndry_freqs[i + 1], :] = band_factors[:, i].unsqueeze(-1).unsqueeze(-1)
-
-        elif filter_type == "linear":
-            band_factors = torch.rand((batch_size, n_freq_band + 1)).to(features) * (db_range[1] - db_range[0]) + db_range[0]
-            freq_filt = torch.ones((batch_size, n_freq_bin, 1)).to(features)
-            for i in range(n_freq_band):
-                for j in range(batch_size):
-                    freq_filt[j, band_bndry_freqs[i]:band_bndry_freqs[i+1], :] = \
-                        torch.linspace(band_factors[j, i], band_factors[j, i+1],
-                                       band_bndry_freqs[i+1] - band_bndry_freqs[i]).unsqueeze(-1)
-            freq_filt = 10 ** (freq_filt / 20)
-        return features * freq_filt
-
-    else:
-        return features
 
 
 def freq_mask(features, mask_ratio=16):
