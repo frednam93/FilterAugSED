@@ -11,7 +11,7 @@ by Hyeonuk Nam, Seong-Hu Kim, Yong-Hwa Park <br>
 [![ICASSP2022](https://img.shields.io/badge/IEEE-ICASSP%202022-informational)](https://ieeexplore.ieee.org/document/9747680) 
 [![arXiv](https://img.shields.io/badge/arXiv-2110.03282-brightgreen)](https://arxiv.org/abs/2110.03282) <br>
 
-Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results), and accepted to [ICASSP 2022](https://2022.ieeeicassp.org/).c
+Ranked on **[3rd place]** in [IEEE DCASE 2021 Task 4](http://dcase.community/challenge2021/task-sound-event-detection-and-separation-in-domestic-environments-results), and accepted to [ICASSP 2022](https://2022.ieeeicassp.org/).
 
 Also, refer to [Frequency Dynamic Convolution SED](https://github.com/frednam93/FDY-SED) which is upgraded SED model from this work!
 
